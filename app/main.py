@@ -1,11 +1,13 @@
+import uuid
+from datetime import datetime, timedelta
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.responses import RedirectResponse
 from sqlmodel import Session, select, SQLModel
+
 from models import URL, URLCreate, URLResponse
 from database import engine, get_session
-import uuid
-from datetime import datetime, timedelta
+from utils import validate_public_url, generate_unique_short_id
 
 
 @asynccontextmanager
@@ -25,7 +27,11 @@ def create_short_url(request: URLCreate, session: Session = Depends(get_session)
     if len(request.original_url) > 2048:
         return URLResponse(success=False, reason="URL too long")
 
-    short_id = str(uuid.uuid4())[:8]
+    validation_result = validate_public_url(str(request.original_url))
+    if not validation_result["success"]:
+        return URLResponse(success=False, reason=validation_result["reason"])
+
+    short_id = generate_unique_short_id(session)
     expiration_date = datetime.now() + timedelta(days=30)
 
     url_entry = URL(
