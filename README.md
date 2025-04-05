@@ -2,6 +2,21 @@
 
 A FastAPI-based URL shortening service with automatic redirection and input validation.
 
+## Getting Started
+
+### **Using Docker Hub**
+
+You can directly pull the prebuilt Docker image from Docker Hub and run it.
+
+#### Pull the Image
+```shell
+docker pull zivhuang0304/url-shortener:latest
+```
+
+#### Run the Container
+```shell
+docker run -d -p 8000:8000 zivhuang0304/url-shortener:latest
+```
 
 ## API Documentation
 
