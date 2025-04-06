@@ -6,17 +6,23 @@ A FastAPI-based URL shortening service with automatic redirection and input vali
 
 ### **Using Docker Hub**
 
-You can directly pull the prebuilt Docker image from Docker Hub and run it.
+You can directly pull the prebuilt Docker image from Docker Hub and run it.  
+*For example, the service will run on port 8000.*
 
-#### Pull the Image
+#### **1. Ensure Port 8000 is Available**
+Before running the container, make sure that port `8000` is not being used by another application on your system. The service will bind to this port by default.
+
+#### 2. Pull the Docker Image
 ```shell
 docker pull zivhuang0304/url-shortener:latest
 ```
 
-#### Run the Container
+#### 3. Run the Container
 ```shell
 docker run -d -p 8000:8000 zivhuang0304/url-shortener:latest
 ```
+
+
 
 ## API Documentation
 
