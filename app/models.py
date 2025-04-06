@@ -13,7 +13,7 @@ class URLCreate(SQLModel):
 
 
 class URLResponse(SQLModel):
-    short_url: str
-    expiration_date: datetime
+    short_url: str | None = None
+    expiration_date: datetime | None = None
     success: bool
     reason: str | None = None

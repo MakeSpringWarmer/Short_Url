@@ -19,15 +19,15 @@ def validate_public_url(url: str) -> dict:
     if not validators.url(url):
         return {"success": False, "reason": "Invalid URL format"}
 
+    if not validators.url(url, private=False):
+        return {"success": False, "reason": "URL is not publicly accessible"}
+
     try:
         response = requests.get(url, timeout=5)
         if response.status_code != 200:
             return {"success": False, "reason": "URL not reachable"}
     except requests.exceptions.RequestException as e:
         return {"success": False, "reason": f"Error reaching URL: {str(e)}"}
-
-    if not validators.url(url, public=True):
-        return {"success": False, "reason": "URL is not publicly accessible"}
 
     return {"success": True}
 
