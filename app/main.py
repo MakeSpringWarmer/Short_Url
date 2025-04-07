@@ -55,8 +55,8 @@ def create_short_url(
     )
     session.add(url_entry)
     session.commit()
-
-    short_url = f"http://localhost:8000/{short_id}"
+    base_url = str(request.base_url).rstrip("/")
+    short_url = f"{base_url}/{short_id}"
     return URLResponse(
         short_url=short_url, expiration_date=expiration_date, success=True
     )
