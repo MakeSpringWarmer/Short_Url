@@ -66,7 +66,9 @@ docker run -d -p 8000:8000 zivhuang0304/url-shortener:latest
   - URL exceeds 2048 characters
   - Invalid URL format
   - URL not publicly accessible
-- `500 Internal Server Error`: Database failure
+- `429 Too Many Requests`: This error occurs when the client exceeds the rate limit of 5 requests per minute. To avoid this error, reduce the frequency of requests or wait before retrying.
+
+- `500 Internal Server Error`: This error indicates a problem on the server side, such as database failure or misconfiguration.
 
 ---
 
